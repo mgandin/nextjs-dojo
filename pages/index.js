@@ -1,20 +1,13 @@
 import Layout from '../components/layout'
+import Link from 'next/link'
 import utilStyles from '../styles/utils.module.css'
+
+import { getSortedPostsData } from '../lib/api'
+
 
 
 export async function getStaticProps() {
-  const allPropsData = [
-    {
-      id: 'ssg-ssr',
-      title: 'When to Use Static Generation v.s. Server-side Rendering',
-      date: '2020-01-02'
-    },
-    {
-      id: 'pre-rendering',
-      title: 'Two Forms of Pre-rendering',
-      date: '2020-01-01'
-    }
-  ]
+  const allPropsData = getSortedPostsData();
   
   return {
     props: {
@@ -37,7 +30,7 @@ export default function Home({ allPropsData }) {
             <li className={utilStyles.listItem} key={id}>
               {title}
               <br />
-              {id}
+              <Link href={`/posts/${id}`}>{id}</Link>
               <br />
               {date}
             </li>
