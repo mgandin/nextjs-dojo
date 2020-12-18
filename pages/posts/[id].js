@@ -6,7 +6,8 @@ import Head from 'next/head'
 import { getAllPostIds, getPostData } from '../../lib/api'
 
 export async function getStaticProps({ params }) {
-  const postData = getPostData(params.id)
+  const postData = await getPostData(params.id)
+  console.log(postData)
   return {
     props: {
       postData
@@ -14,7 +15,7 @@ export async function getStaticProps({ params }) {
   }
 }
 export async function getStaticPaths() {
-  const paths = getAllPostIds()
+  const paths = await getAllPostIds()
   return {
     paths,
     fallback: false
